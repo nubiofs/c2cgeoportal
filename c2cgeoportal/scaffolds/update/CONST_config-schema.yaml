@@ -135,7 +135,7 @@ mapping:
                 required: True
             registered:
                 <<: *free_dict
-                type: any
+                required: True
             available_in_templates:
                 type: seq
                 required: True
@@ -235,26 +235,54 @@ mapping:
         required: True
     pdfreport:
         type: map
-        required: True
         mapping:
             print_url:
                 type: str
-            defaults:
+            layer-defaults: &free_dict
                 type: map
                 mapping:
-                    backgroundlayers:
-                        type: seq
-                        sequence:
-                            type: str
-                    imageformat:
-                        type: str
-                        pattern: '[a-z]+/[a-z]+'
-                    zoomType:
-                        type: str
-                    minScale:
-                        type: int
-                    style:
-                        type: str
+                    .+:
+                        type: any
+            map-default: *free_dict
+            layers:
+                type: map
+                mapping:
+                    .*:
+                        type: map
+                        mapping:
+                            check_credentials:
+                                type: bool
+                                required: True
+                            srs:
+                                type: int
+                                required: True
+                            spec:
+                                type: any
+                            map: *map
+                                type: map
+                                mapping:
+                                    backgroundlayers:
+                                        type: seq
+                                        required: True
+                                        sequence:
+                                        -   type: str
+                                    imageformat:
+                                        type: str
+                                        required: True
+                                        pattern: '[a-z]+/[a-z]+'
+                                    zoomType:
+                                        type: str
+                                        required: True
+                                    minScale:
+                                        type: int
+                                        required: True
+                                    style:
+                                        type: any
+                                        required: True
+                            maps:
+                                type: seq
+                                sequence:
+                                -   *map
     subdomain_url_template:
         type: str
     subdomains:
