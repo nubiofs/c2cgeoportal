@@ -238,12 +238,8 @@ mapping:
         mapping:
             print_url:
                 type: str
-            layer-defaults: &free_dict
-                type: map
-                mapping:
-                    .+:
-                        type: any
-            map-default: *free_dict
+            layer-defaults: *free_dict
+            map-defaults: *free_dict
             layers:
                 type: map
                 mapping:
@@ -258,7 +254,7 @@ mapping:
                                 required: True
                             spec:
                                 type: any
-                            map: *map
+                            map: &map
                                 type: map
                                 mapping:
                                     backgroundlayers:
