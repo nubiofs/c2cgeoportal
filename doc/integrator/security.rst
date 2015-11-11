@@ -53,6 +53,7 @@ access, but no credentials will be passed in the case.
 Available services are:
 
 - login
+- mapserver
 - layers
 - print
 - profile

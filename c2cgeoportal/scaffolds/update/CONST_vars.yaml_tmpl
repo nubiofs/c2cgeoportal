@@ -317,6 +317,19 @@ vars:
     - http://{host}/{instanceid}
     - https://{host}/{instanceid}
 
+    headers:
+        login: &default-headers
+            access_control_max_age: 3600
+        mapserver:
+            <<: *default-headers
+            access_control_allow_origin: "*"
+        layers: *default-headers
+        print: *default-headers
+        profile: *default-headers
+        raster: *default-headers
+        error: *default-headers
+
+
 interpreted:
     python:
     - authtkt.secret

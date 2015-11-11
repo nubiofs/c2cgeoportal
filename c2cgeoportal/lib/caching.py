@@ -115,8 +115,7 @@ def set_cors_headers(service_headers_settings, request, service_name,
         return  # Not a CORS request if this header is missing
     origin = request.headers["Origin"]
 
-    if not service_headers_settings or \
-            "access_control_allow_origin" not in service_headers_settings:
+    if "access_control_allow_origin" not in service_headers_settings:
         log.warning("CORS query not configured for service=%s", service_name)
         return
 
@@ -142,7 +141,7 @@ def set_cors_headers(service_headers_settings, request, service_name,
     })
 
     if preflight:
-        max_age = service_headers_settings.get("access_control_max_age", 3600)
+        max_age = service_headers_settings["access_control_max_age"]
         response.headers["Access-Control-Max-Age"] = str(max_age)
 
     if credentials:
@@ -178,15 +177,11 @@ def set_common_headers(
         raise "Invalid cache type"
 
     if hasattr(request, "registry"):
-        headers_settings = request.registry.settings.get("headers", {})
-        service_headers_settings = headers_settings.get(service_name)
+        headers_settings = request.registry.settings["headers"]
+        service_headers_settings = headers_settings[service_name]
 
         if cache != NO_CACHE:
-            max_age = request.registry.settings["default_max_age"]
-
-            if service_headers_settings and \
-                    "cache_control_max_age" in service_headers_settings:
-                max_age = service_headers_settings["cache_control_max_age"]
+            max_age = service_headers_settings["cache_control_max_age"]
 
             if max_age != 0:
                 response.cache_control.max_age = max_age
