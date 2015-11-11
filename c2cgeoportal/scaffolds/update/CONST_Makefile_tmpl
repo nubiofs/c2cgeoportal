@@ -435,7 +435,9 @@ $(VENV_BIN)/c2c-template: .build/dev-requirements.timestamp
 
 .build/config-$(INSTANCE_ID).timestamp: $(VENV_BIN)/c2c-template $(VARS_DEPENDS) $(MAKE_FILES)
 	rm -f .build/config-*.timestamp | true
-	$(C2C_TEMPLATE_CMD) --get-config .build/config.yaml $(CONFIG_VARS)
+	$(C2C_TEMPLATE_CMD) --get-config .build/_config.yaml $(CONFIG_VARS)
+	$(VENV_BIN)/pykwalify --data-file .build/_config.yaml --schema-file CONST_config-schema.yaml
+	mv .build/_config.yaml .build/config.yaml
 	touch $@
 
 # server localisation

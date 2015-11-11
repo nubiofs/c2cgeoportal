@@ -224,6 +224,8 @@ vars:
     # Define whether the MapServer proxy should hide the OGC capabilities.
     hide_capabilities: false
 
+    ogcproxy_enable: false
+
     # For print proxy
     print_url: http://localhost:8080/print-{instanceid}/print/{package}
 

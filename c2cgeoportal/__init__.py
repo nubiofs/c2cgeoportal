@@ -307,14 +307,14 @@ def add_static_view_ngeo(config):  # pragma: nocover
         cache_max_age=int(config.get_settings()["default_max_age"])
     )
 
-    config.add_static_view("node_modules", config.get_settings().get("node_modules_path"))
-    config.add_static_view("closure", config.get_settings().get("closure_library_path"))
+    config.add_static_view("node_modules", config.get_settings()["node_modules_path"])
+    config.add_static_view("closure", config.get_settings()["closure_library_path"])
 
     mimetypes.add_type("text/css", ".less")
 
 
 def add_admin_interface(config):
-    if config.get_settings().get("enable_admin_interface", False):
+    if config.get_settings()["enable_admin_interface"]:
         config.formalchemy_admin(
             route_name="admin",
             package=config.get_settings()["package"],
@@ -349,7 +349,7 @@ def locale_negotiator(request):
         # if best_match returns None then Pyramid will use what's defined in
         # the default_locale_name configuration variable
         return request.accept_language.best_match(
-            request.registry.settings.get("available_locale_names"))
+            request.registry.settings["available_locale_names"])
     return lang
 
 
@@ -440,7 +440,7 @@ def mapserverproxy_route_predicate(info, request):
     """ Serve as a custom route predicate function for mapserverproxy.
     If the hide_capabilities setting is set and is true then we want to
     return 404s on GetCapabilities requests."""
-    hide_capabilities = request.registry.settings.get("hide_capabilities")
+    hide_capabilities = request.registry.settings["hide_capabilities"]
     if not hide_capabilities:
         return True
     params = dict(
@@ -478,7 +478,7 @@ def includeme(config):
 
     # update the settings object from the YAML application config file
     settings = config.get_settings()
-    settings.update(yaml.load(file(settings.get("app.cfg"))))
+    settings.update(yaml.load(file(settings["app.cfg"])))
 
     global srid
     global schema
@@ -532,7 +532,7 @@ def includeme(config):
     config.add_directive("set_user_validator", set_user_validator)
     config.set_user_validator(default_user_validator)
 
-    if settings.get("ogcproxy_enable", True):
+    if settings["ogcproxy_enable"]:
         # add an OGCProxy view
         config.add_route(
             "ogcproxy", "/ogcproxy",

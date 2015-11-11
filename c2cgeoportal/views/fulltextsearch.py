@@ -49,8 +49,8 @@ class FullTextSearchView(object):
     def __init__(self, request):
         self.request = request
         set_common_headers(request, "fulltextsearch", NO_CACHE, add_cors=True)
-        self.settings = request.registry.settings.get("fulltextsearch", {})
-        self.languages = self.settings.get("languages", {})
+        self.settings = request.registry.settings["fulltextsearch"]
+        self.languages = self.settings["languages"]
 
     @cache_region.cache_on_arguments()
     def _get_interface_id(self, interface):
@@ -70,12 +70,13 @@ class FullTextSearchView(object):
             return HTTPBadRequest(detail="no query")
         query = self.request.params.get("query")
 
-        maxlimit = self.settings.get("maxlimit", 200)
+        maxlimit = self.settings["maxlimit"]
 
         try:
             limit = int(self.request.params.get(
                 "limit",
-                self.settings.get("defaultlimit", 30)))
+                self.settings["defaultlimit"]
+            ))
         except ValueError:
             return HTTPBadRequest(detail="limit value is incorrect")
         if limit > maxlimit:

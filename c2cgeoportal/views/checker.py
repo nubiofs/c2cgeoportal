@@ -279,7 +279,7 @@ class Checker(object):  # pragma: no cover
     def themes_errors(self):
         from c2cgeoportal.models import DBSession, Interface
 
-        settings = self.settings.get("themes", {})
+        settings = self.settings["themes"]
 
         _url = self.request.route_url("themes")
         h = Http()
@@ -332,7 +332,7 @@ class Checker(object):  # pragma: no cover
             ))
 
         result = []
-        for _type in self.settings.get("lang_files", []):
+        for _type in self.settings["lang_files"]:
             for lang in available_locale_names:
                 if _type == "cgxp":
                     _url = self.request.static_url(

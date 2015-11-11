@@ -73,7 +73,7 @@ class Entry(object):
     def __init__(self, request):
         self.request = request
         self.settings = request.registry.settings
-        self.mapserver_settings = self.settings.get("mapserverproxy", {})
+        self.mapserver_settings = self.settings["mapserverproxy"]
         self.debug = "debug" in request.params
         self.lang = request.locale_name
 
@@ -861,7 +861,7 @@ class Entry(object):
     @cache_region.cache_on_arguments()
     def _get_layers_enum(self):
         layers_enum = {}
-        if "enum" in self.settings.get("layers", {}):
+        if "enum" in self.settings["layers"]:
             for layer_name, layer in \
                     self.settings["layers"]["enum"].items():
                 layer_enum = {}
@@ -1129,7 +1129,7 @@ class Entry(object):
         queryable_layers = [
             name for name in list(wms.contents)
             if wms[name].queryable == 1]
-        cache_version = self.settings.get("cache_version", None)
+        cache_version = self.settings["cache_version"]
 
         set_common_headers(
             self.request, "apijs", NO_CACHE,
@@ -1151,7 +1151,7 @@ class Entry(object):
         queryable_layers = [
             name for name in list(wms.contents)
             if wms[name].queryable == 1]
-        cache_version = self.settings.get("cache_version", None)
+        cache_version = self.settings["cache_version"]
 
         set_common_headers(
             self.request, "xapijs", NO_CACHE,

@@ -71,10 +71,6 @@ vars:
     subdomains: [s1, s2, s3]
 
     fulltextsearch:
-        languages:
-            fr: french
-            en: english
-            de: german
 
     # Checker configuration
     checker:
@@ -124,3 +120,4 @@ update_paths:
 - checker
 - check_collector.hosts
 - admin_interface
+- fulltextsearch

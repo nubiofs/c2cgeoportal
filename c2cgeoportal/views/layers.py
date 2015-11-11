@@ -61,8 +61,8 @@ class Layers(object):
 
     def __init__(self, request):
         self.request = request
-        self.settings = request.registry.settings.get("layers", {})
-        self.layers_enum_config = self.settings.get("enum", None)
+        self.settings = request.registry.settings["layers"]
+        self.layers_enum_config = self.settings["enum"]
 
     def _get_geom_col_info(self, layer):
         """ Return information about the layer's geometry column, namely
@@ -314,7 +314,7 @@ class Layers(object):
             return {"validation_error": str(e)}
 
     def _validate_geometry(self, geom):
-        validate = self.settings.get("geometry_validation", False)
+        validate = self.settings["geometry_validation"]
         if validate and geom is not None:
             simple = DBSession.query(func.ST_IsSimple(geom)).scalar()
             if not simple:
