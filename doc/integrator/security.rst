@@ -53,6 +53,10 @@ access, but no credentials will be passed in the case.
 Available services are:
 
 - login
+- index
+- config
+- api
+- theme
 - mapserver
 - layers
 - print

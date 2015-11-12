@@ -901,7 +901,7 @@ class Entry(object):
         except:  # pragma: no cover
             d["mobile_url"] = None
 
-        set_common_headers(self.request, "cgxp_index", NO_CACHE)
+        set_common_headers(self.request, "index", NO_CACHE)
 
         return d
 
@@ -959,14 +959,14 @@ class Entry(object):
             d["permalink_themes"] = json.dumps(permalink_themes.split(","))
 
         set_common_headers(
-            self.request, "cgxp_viewer", NO_CACHE,
+            self.request, "config", NO_CACHE,
             vary=True, content_type="application/javascript",
         )
 
         return d
 
     def get_ngeo_index_vars(self, vars={}):
-        set_common_headers(self.request, "ngeo_index", NO_CACHE, add_cors=True)
+        set_common_headers(self.request, "index", NO_CACHE, add_cors=True)
 
         vars.update({
             "lang": self.lang,
@@ -989,7 +989,7 @@ class Entry(object):
         """
         View callable for the mobile application's index.html file.
         """
-        set_common_headers(self.request, "sencha_index", NO_CACHE)
+        set_common_headers(self.request, "index", NO_CACHE)
 
         extra_params = dict(self.request.params)
         came_from = self.request.current_route_url(_query=extra_params)
@@ -1107,7 +1107,7 @@ class Entry(object):
                 })
 
         set_common_headers(
-            self.request, "sencha_config", PRIVATE_CACHE,
+            self.request, "config", PRIVATE_CACHE,
             vary=True, content_type="application/javascript",
         )
 
@@ -1132,7 +1132,7 @@ class Entry(object):
         cache_version = self.settings["cache_version"]
 
         set_common_headers(
-            self.request, "apijs", NO_CACHE,
+            self.request, "api", NO_CACHE,
             content_type="application/javascript",
         )
 
@@ -1154,7 +1154,7 @@ class Entry(object):
         cache_version = self.settings["cache_version"]
 
         set_common_headers(
-            self.request, "xapijs", NO_CACHE,
+            self.request, "api", NO_CACHE,
             content_type="application/javascript",
         )
 
@@ -1168,7 +1168,7 @@ class Entry(object):
 
     @view_config(route_name="apihelp", renderer="api/apihelp.html")
     def apihelp(self):
-        set_common_headers(self.request, "apihelp", NO_CACHE)
+        set_common_headers(self.request, "index", NO_CACHE)
 
         return {
             "lang": self.lang,
@@ -1177,7 +1177,7 @@ class Entry(object):
 
     @view_config(route_name="xapihelp", renderer="api/xapihelp.html")
     def xapihelp(self):
-        set_common_headers(self.request, "xapihelp", NO_CACHE)
+        set_common_headers(self.request, "index", NO_CACHE)
 
         return {
             "lang": self.lang,

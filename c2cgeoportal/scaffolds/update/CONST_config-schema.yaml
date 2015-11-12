@@ -80,6 +80,10 @@ mapping:
                     access_control_max_age:
                         required: True
                         type: int
+            index: *header
+            config: *header
+            api: *header
+            theme: *header
             mapserver: *header
             layers: *header
             print: *header
