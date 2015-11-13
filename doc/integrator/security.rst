@@ -56,7 +56,7 @@ Available services are:
 - index
 - config
 - api
-- theme
+- themes
 - mapserver
 - layers
 - print

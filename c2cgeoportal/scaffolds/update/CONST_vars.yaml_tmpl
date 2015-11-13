@@ -323,7 +323,7 @@ vars:
         index: *default-headers
         config: *default-headers
         api: *default-headers
-        theme: *default-headers
+        themes: *default-headers
         mapserver:
             <<: *default-headers
             access_control_allow_origin: "*"

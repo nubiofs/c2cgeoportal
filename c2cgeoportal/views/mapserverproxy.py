@@ -184,7 +184,7 @@ class MapservProxy(Proxy):
                 content, role_id, self.lower_params.get("service") == "wms",
                 self._get_wms_url(),
                 self.request.headers,
-                self.settings["proxies"]
+                self.settings.get("proxies")
             )
 
         content_type = None

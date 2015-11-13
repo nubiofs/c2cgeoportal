@@ -83,7 +83,7 @@ mapping:
             index: *header
             config: *header
             api: *header
-            theme: *header
+            themes: *header
             mapserver: *header
             layers: *header
             print: *header
