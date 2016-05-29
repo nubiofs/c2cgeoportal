@@ -9,4 +9,3 @@ http-parser==0.8.3
 restkit==4.2.2
 
 https://github.com/camptocamp/pyramid_closure/archive/819bc43420b3cd924d8698c5a9606592c19dbb15.zip#egg=pyramid_closure
--e .
