@@ -126,9 +126,11 @@ class PdfReport(Proxy):  # pragma: no cover
 
     @view_config(route_name="pdfreport", renderer="json")
     def get_report(self):
-        id = self.request.matchdict["id"]
+        ids = self.request.matchdict["ids"].split(",")
         self.layername = self.request.matchdict["layername"]
         self.layer_config = self.config.get("layers", {}).get(self.layername, {})
+
+        features_ids = [self.layername + "." + id_ for id_ in ids]
 
         if self._get_config("check_credentials", True):
             # check user credentials
@@ -155,7 +157,7 @@ class PdfReport(Proxy):  # pragma: no cover
                 "outputformat": "gml3",
                 "request": "GetFeature",
                 "typeName": self.layername,
-                "featureid": self.layername + "." + id,
+                "featureid": ",".join(features_ids),
                 "srsName": "epsg:" + str(srs)
             }.items()])
         )
@@ -166,7 +168,7 @@ class PdfReport(Proxy):  # pragma: no cover
                 "layout": self.layername,
                 "outputFormat": "pdf",
                 "attributes": {
-                    "paramID": id
+                    "ids": ids
                 }
             }
             map_config = self.layer_config.get("map")
@@ -185,7 +187,7 @@ class PdfReport(Proxy):  # pragma: no cover
         else:
             spec = loads(dumps(spec) % {
                 "layername": self.layername,
-                "id": id,
+                "ids": dumps(ids),
                 "srs": srs,
                 "mapserv_url": mapserv_url,
                 "vector_request_url": vector_request_url,
