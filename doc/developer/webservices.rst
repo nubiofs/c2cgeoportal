@@ -407,7 +407,8 @@ Parameters
 ``````````
 
 * ``url``: URL to shorten.
-* ``email``: Email address to send a message to.
+* ``email``: Email address to send a message to (optional).
+* ``message``: The message to add in the email (optional).
 * ``callback``: Function name to do the callback.
 
 Result
