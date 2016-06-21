@@ -79,6 +79,34 @@ vars:
             en: english
             de: german
 
+    shortener:
+        # Used to send a confirmation email
+        email_from: info@camptocamp.com
+        email_subject: Short URL to GeoMapFish
+        email_body: |
+            Hello,
+
+            Somebody send you the URL %(short_url)s to GeoMapFish with the message:
+            %(message)s
+
+            Sincerely yours
+            The GeoMapfish team
+        smtp_server: smtp.example.com
+
+    reset_password:
+        # Used to send a confirmation email
+        email_from: info@camptocamp.com
+        email_subject: New password generated for GeoMapFish
+        email_body: |
+            Hello {user},
+
+            You have asked for an new password,
+            the newly generated password is: {password}
+
+            Sincerely yours
+            The GeoMapfish team
+        smtp_server: smtp.example.com
+
     # Checker configuration
     checker:
         defaults:
@@ -109,20 +137,6 @@ vars:
         # - display: Child:
         #   url: http://{host}/child/wsgi
 
-    reset_password:
-        # Used to send a confirmation email
-        email_from: info@camptocamp.com
-        email_subject: New password generated for GeoMapFish
-        email_body: |
-            Hello {user},
-
-            You have asked for an new password,
-            the newly generated password is: {password}
-
-            Sincerely yours
-            The GeoMapfish team
-        smtp_server: smtp.example.com
-
 update_paths:
 - authtkt
 - checker.defaults
@@ -130,3 +144,4 @@ update_paths:
 - check_collector.disabled
 - check_collector.hosts
 - admin_interface
+- shortener
