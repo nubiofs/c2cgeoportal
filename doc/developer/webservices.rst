@@ -331,7 +331,7 @@ Parameters
 * ``partitionlimit``: The maximum number of results per layer (optional).
 * ``lang``: The used language (optional).
 * ``interface``: The used interface (optional).
-* ``callback``: Name of the callback function (optional).
+* ``callback``: Name of the callback function (optional, depercated in v2).
 
 Result
 ------
@@ -359,7 +359,7 @@ Parameters
 * ``lon``: The longitude.
 * ``lat``: The latitude.
 * ``layers``: The raster layers we want to query.
-* ``callback``: Function name to do the callback.
+* ``callback``: Function name to do the callback (depercated in v2).
 
 Result
 ------
@@ -385,7 +385,7 @@ Parameters
 * ``geom``: Geometry field used to get the profile data.
 * ``layers``: On witch layers, default to all.
 * ``nbPoints``: Maximum number of points.
-* ``callback``: Function name to do the callback.
+* ``callback``: Function name to do the callback (depercated in v2).
 
 Result
 ------
@@ -409,7 +409,7 @@ Parameters
 * ``url``: URL to shorten.
 * ``email``: Email address to send a message to (optional).
 * ``message``: The message to add in the email (optional).
-* ``callback``: Function name to do the callback.
+* ``callback``: Function name to do the callback (depercated in v2).
 
 Result
 ``````
