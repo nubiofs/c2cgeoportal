@@ -6,11 +6,7 @@ python:
 sudo: required
 
 services:
-- postgresql
 - docker
-
-addons:
-  postgresql: "9.3"
 
 env:
   global:
@@ -28,18 +24,9 @@ before_install:
 - sudo ln -s /usr/bin/nodejs /usr/bin/node
 - pip install coveralls pyignore
 
-- sudo -u postgres createdb --encoding=UTF8 --template=template0 template_postgis
-- psql --dbname=template_postgis --username=postgres --command="CREATE EXTENSION postgis;"
-
-- sudo -u postgres createdb --encoding=UTF8 --template=template_postgis c2cgeoportal_test
-- sudo -u postgres createdb --encoding=UTF8 --template=template_postgis geomapfish
-
-- sudo -u postgres createuser www-data --no-superuser --no-createdb --no-createrole
-- sudo sh -c 'echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/9.3/main/pg_hba.conf'
-- sudo sh -c 'echo "listen_addresses = '"'*'"'" >> /etc/postgresql/9.3/main/postgresql.conf'
-- sudo service postgresql restart
-- cp travis/db.sql /tmp
-- sudo --user=postgres psql --quiet --dbname=c2cgeoportal_test --file=/tmp/db.sql
+- sudo service postgresql stop
+- docker build --file travis/db.docker --tag=camptocamp/c2cgeoportal-test-db travis
+- docker run --publish=5432:5432 --detach camptocamp/c2cgeoportal-test-db
 
 - |
   if [ "${TX_PASS}" != "" ]
@@ -59,6 +46,7 @@ before_install:
     else
         docker pull sbrunner/c2cgeoportal
     fi
+
 install:
 - if [ ${TRAVIS_PULL_REQUEST} != "false" ] ; then git fetch origin ${TRAVIS_BRANCH}:${TRAVIS_BRANCH}; fi
 - ./docker-run travis/no-make-error.sh . help
@@ -72,7 +60,6 @@ install:
 
 script:
 - uname --all
-- sudo -u postgres psql --version
 - node --version
 - npm --version
 - flake8 --version
