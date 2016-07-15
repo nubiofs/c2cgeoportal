@@ -38,7 +38,7 @@ from pyramid import testing
 from c2cgeoportal.tests.functional import (  # noqa
     tear_down_common as tearDownModule,
     set_up_common as setUpModule,
-    mapserv_url, host, create_dummy_request)
+    mapserv_url, create_dummy_request)
 
 import logging
 log = logging.getLogger(__name__)
@@ -482,25 +482,25 @@ class TestThemesView(TestCase):
         self.assertEquals(self._get_filtered_errors(themes), set())
         self.assertEquals(
             themes["ogcServers"], {
-                "__test_ogc_server_internal": {
+                u"__test_ogc_server_internal": {
                     "wfsSupport": False,
-                    "url": "http://localhost/mapserver?map=/src/c2cgeoportal/tests/functional/c2cgeoportal_test.map&",
+                    "url": "http://mapserver/",
                     "isSingleTile": False,
                     "auth": None,
-                    "urlWfs": "http://localhost/mapserver?map=/src/c2cgeoportal/tests/functional/c2cgeoportal_test.map&",
+                    "urlWfs": "http://mapserver/",
                     "type": u"mapserver",
                     "imageType": u"image/jpeg",
                 },
-                "source for image/jpeg": {
+                u"source for image/jpeg": {
                     "wfsSupport": True,
-                    "url": "http://localhost/mapserver?map=/src/c2cgeoportal/tests/functional/c2cgeoportal_test.map&",
+                    "url": "http://mapserver/",
                     "isSingleTile": False,
-                    "auth": "main",
-                    "urlWfs": "http://localhost/mapserver?map=/src/c2cgeoportal/tests/functional/c2cgeoportal_test.map&",
+                    "auth": u"main",
+                    "urlWfs": "http://mapserver/",
                     "type": u"mapserver",
                     "imageType": u"image/jpeg",
                 },
-                "__test_ogc_server_external": {
+                u"__test_ogc_server_external": {
                     "wfsSupport": False,
                     "url": u"http://wms.geo.admin.ch/",
                     "isSingleTile": False,
@@ -509,12 +509,12 @@ class TestThemesView(TestCase):
                     "type": u"mapserver",
                     "imageType": u"image/jpeg",
                 },
-                "source for image/png": {
+                u"source for image/png": {
                     "wfsSupport": True,
-                    "url": "http://localhost/mapserver?map=/src/c2cgeoportal/tests/functional/c2cgeoportal_test.map&",
+                    "url": "http://mapserver/",
                     "isSingleTile": False,
-                    "auth": "main",
-                    "urlWfs": "http://localhost/mapserver?map=/src/c2cgeoportal/tests/functional/c2cgeoportal_test.map&",
+                    "auth": u"main",
+                    "urlWfs": "http://mapserver/",
                     "type": u"mapserver",
                     "imageType": u"image/png",
                 }

@@ -28,7 +28,6 @@
 # either expressed or implied, of the FreeBSD Project.
 
 
-import os
 from unittest import TestCase
 from nose.plugins.attrib import attr
 
@@ -104,10 +103,7 @@ class TestMapserverproxyViewGroup(TestCase):
 
         request = create_dummy_request({
             "mapserverproxy": {
-                "mapserv_url": "%s?map=%s" % (mapserv_url, os.path.join(
-                    os.path.dirname(os.path.abspath(__file__)),
-                    "c2cgeoportal_test.map"
-                )),
+                "mapserv_url": mapserv_url,
                 "geoserver": False,
             }
         })

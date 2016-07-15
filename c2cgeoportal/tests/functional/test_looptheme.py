@@ -32,13 +32,12 @@ from unittest import TestCase
 from nose.plugins.attrib import attr
 
 import transaction
-import os
 from pyramid import testing
 
 from c2cgeoportal.tests.functional import (  # noqa
     tear_down_common as tearDownModule,
     set_up_common as setUpModule,
-    mapserv_url, host)
+    mapserv_url)
 
 
 @attr(functional=True)
@@ -85,14 +84,10 @@ class TestLoopTheme(TestCase):
         from c2cgeoportal.views.entry import Entry, cache_region
 
         request = testing.DummyRequest()
-        request.headers["Host"] = host
         request.static_url = lambda url: "http://example.com/dummy/static/url"
         request.route_url = lambda url: mapserv_url
         request.client_addr = None
-        curdir = os.path.dirname(os.path.abspath(__file__))
-        mapfile = os.path.join(curdir, "c2cgeoportal_test.map")
-        ms_url = "%s?map=%s&" % (mapserv_url, mapfile)
-        request.registry.settings["mapserverproxy"]["mapserv_url"] = ms_url
+        request.registry.settings["mapserverproxy"]["mapserv_url"] = mapserv_url
         request.user = None
         entry = Entry(request)
 

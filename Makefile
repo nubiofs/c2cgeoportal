@@ -124,7 +124,7 @@ $(BUILD_DIR)/sphinx.timestamp: $(SPHINX_FILES)
 
 .PHONY: nose
 nose: c2c-egg $(MAKO_FILES:.mako=)
-	python setup.py nosetests
+	./setup.py nosetests
 
 .PHONY: flake8
 flake8:

@@ -57,7 +57,6 @@
 #
 #
 
-import os
 import hashlib
 from unittest2 import TestCase
 from nose.plugins.attrib import attr
@@ -258,10 +257,6 @@ class TestMapserverproxyView(TestCase):
                 ]
             }
         })
-        request.params = {"map": os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            "c2cgeoportal_test.map"
-        )}
         request.user = None if username is None else \
             DBSession.query(User).filter_by(username=username).one()
         return request
@@ -577,10 +572,7 @@ class TestMapserverproxyView(TestCase):
 
         request = create_dummy_request({
             "mapserverproxy": {
-                "mapserv_url": "%s?map=%s" % (mapserv_url, os.path.join(
-                    os.path.dirname(os.path.abspath(__file__)),
-                    "c2cgeoportal_test.map"
-                )),
+                "mapserv_url": mapserv_url,
                 "geoserver": False,
             }
         })
