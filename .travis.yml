@@ -22,7 +22,7 @@ before_install:
 - sudo aptitude install --assume-yes apache2 libapache2-mod-wsgi libapache2-mod-fcgid tomcat7 nodejs deploy cgi-mapserver
 - sudo apt-get install --option Dpkg::Options::="--force-confold" --force-yes --assume-yes docker-engine
 - sudo ln -s /usr/bin/nodejs /usr/bin/node
-- pip install coveralls pyignore
+- pip install pyignore
 
 - sudo rm -f /usr/local/bin/docker-compose
 - sudo pip install docker-compose
@@ -110,7 +110,7 @@ after_failure:
 - ./docker-compose-run make tests
 
 after_success:
-- coveralls
+- ./docker-run coveralls
 - openssl aes-256-cbc -K $encrypted_ae821512cabf_key -iv $encrypted_ae821512cabf_iv -in deploy_key.enc -out ~/.ssh/id_rsa -d | true
 - chmod 600 ~/.ssh/id_rsa
 - git config --global user.email travis@camptocamp.com
