@@ -1,0 +1,5 @@
+INSTANCE_ID = $(GIT_BRANCH)
+APACHE_ENTRY_POINT = /$(GIT_BRANCH)/
+DEVELOPMENT = TRUE
+
+include {{package}}.mk 
